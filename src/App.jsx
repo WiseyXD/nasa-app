@@ -1,9 +1,14 @@
 import { useState } from "react";
-
+import Astro from "./assets/astronaut.png";
 function App() {
 	const [count, setCount] = useState(0);
 
-	return <>Heelo</>;
+	return (
+		<div>
+			<p>Hello</p>
+			<img src={Astro} alt="" />
+		</div>
+	);
 }
 
 export default App;
