@@ -2,16 +2,40 @@ import React, { useEffect, useState } from "react";
 import { galleryAPI } from "../utils/api";
 export default function Gallery() {
 	const [list, setList] = useState([]);
-
+	var city = "london";
 	async function galleryData() {
 		const resp = await fetch(galleryAPI);
 		const data = await resp.json();
 		setList(data);
 	}
+	async function testData() {
+		try {
+			const response = await fetch(
+				`https://api.api-ninjas.com/v1/geocoding?city=${city}`,
+				{
+					method: "GET",
+					headers: {
+						"X-Api-Key": "Ul0m7HjUTnQ01rmYkHxfvw==CeVr2KYEnTVt5kW4",
+						"Content-Type": "application/json",
+					},
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! Status: ${response.status}`);
+			}
+
+			const result = await response.json();
+			console.log(result[0]);
+		} catch (error) {
+			console.error("Error:", error);
+		}
+	}
 	console.log(list);
 
 	useEffect(() => {
 		galleryData();
+		testData();
 	}, []);
 
 	return (

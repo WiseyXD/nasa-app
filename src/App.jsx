@@ -6,6 +6,7 @@ import News from "./Components/News";
 import Footer from "./Components/Footer";
 import Gallery from "./Components/Gallery";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Forecast from "./Components/Forecast";
 function App() {
 	const [count, setCount] = useState(0);
 	const router = createBrowserRouter([
@@ -16,6 +17,10 @@ function App() {
 		{
 			path: "/gallery",
 			element: <Gallery />,
+		},
+		{
+			path: "/forecast",
+			element: <Forecast />,
 		},
 	]);
 
