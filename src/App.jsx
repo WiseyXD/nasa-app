@@ -5,6 +5,9 @@ import Body from "./Components/Body";
 import News from "./Components/News";
 import Footer from "./Components/Footer";
 import Gallery from "./Components/Gallery";
+import Quiz from "./Components/Quiz";
+import Map from "./Components/Map";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Forecast from "./Components/Forecast";
 function App() {
@@ -19,9 +22,20 @@ function App() {
 			element: <Gallery />,
 		},
 		{
+
+			path: "/quiz",
+			element: <Quiz />,
+		},
+		{
+			path: "/map",
+			element: <Map />,
+		},
+
+    {
 			path: "/forecast",
 			element: <Forecast />,
 		},
+
 	]);
 
 	return (
