@@ -5,6 +5,9 @@ import Body from "./Components/Body";
 import News from "./Components/News";
 import Footer from "./Components/Footer";
 import Gallery from "./Components/Gallery";
+import Quiz from "./Components/Quiz";
+import Map from "./Components/Map";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 function App() {
 	const [count, setCount] = useState(0);
@@ -17,6 +20,15 @@ function App() {
 			path: "/gallery",
 			element: <Gallery />,
 		},
+		{
+			path: "/quiz",
+			element: <Quiz />,
+		},
+		{
+			path: "/Map",
+			element: <Map />,
+		},
+
 	]);
 
 	return (
