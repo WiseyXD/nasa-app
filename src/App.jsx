@@ -7,10 +7,10 @@ import Footer from "./Components/Footer";
 import Gallery from "./Components/Gallery";
 import Quiz from "./Components/Quiz";
 import Map from "./Components/Map";
-
+import Example from "./Components/Example";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Forecast from "./Components/Forecast";
-import SpaceGPT from "./Components/SpaceGPT";
+
 function App() {
 	const [count, setCount] = useState(0);
 	const router = createBrowserRouter([
@@ -36,7 +36,7 @@ function App() {
 		},
 		{
 			path: "/space",
-			element: <SpaceGPT />,
+			element: <Example />,
 		},
 	]);
 
