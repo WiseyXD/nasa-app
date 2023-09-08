@@ -9,6 +9,7 @@ import Quiz from "./Components/Quiz";
 import Map from "./Components/Map";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Forecast from "./Components/Forecast";
 function App() {
 	const [count, setCount] = useState(0);
 	const router = createBrowserRouter([
@@ -21,12 +22,18 @@ function App() {
 			element: <Gallery />,
 		},
 		{
+
 			path: "/quiz",
 			element: <Quiz />,
 		},
 		{
-			path: "/Map",
+			path: "/map",
 			element: <Map />,
+		},
+
+    {
+			path: "/forecast",
+			element: <Forecast />,
 		},
 
 	]);
