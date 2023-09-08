@@ -5,55 +5,58 @@ export default function Forecast() {
 	const [city, setCity] = useState("");
 	const [ans, setAns] = useState("");
 	const [isLoaded, setIsLoaded] = useState(true);
-
-	function celsius(num) {
-		return Math.floor(num - 273.15);
+	const url = `https://apjoy-weather-forecast.p.rapidapi.com/forecast?location=${city}&days=3`;
+	const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '42047b4750msh234436c97fc8894p1a2e84jsn3df40fb61052',
+		'X-RapidAPI-Host': 'apjoy-weather-forecast.p.rapidapi.com'
 	}
+};
+	// function celsius(num) {
+	// 	return Math.floor(num - 273.15);
+	// }
 
 	async function resultData() {
-		const data = await fetch(
-			`https://api.openweathermap.org/data/2.5/weather?lat=${
-				coords.lat
-			}&lon=${coords.lon}&appid=${"2aab295c1e12a99da425ebfae1d5e0be"}`
-		);
+		const data = await fetch(url, options);
 		const resp = await data.json();
 		console.log(resp);
 		setAns(resp);
 		setIsLoaded(true);
 		console.log(ans);
 	}
-	async function testData() {
-		try {
-			const response = await fetch(
-				`https://api.api-ninjas.com/v1/geocoding?city=${city}`,
-				{
-					method: "GET",
-					headers: {
-						"X-Api-Key": "Ul0m7HjUTnQ01rmYkHxfvw==CeVr2KYEnTVt5kW4",
-						"Content-Type": "application/json",
-					},
-				}
-			);
+	// async function testData() {
+	// 	try {
+	// 		const response = await fetch(
+	// 			`https://api.api-ninjas.com/v1/geocoding?city=${city}`,
+	// 			{
+	// 				method: "GET",
+	// 				headers: {
+	// 					"X-Api-Key": "Ul0m7HjUTnQ01rmYkHxfvw==CeVr2KYEnTVt5kW4",
+	// 					"Content-Type": "application/json",
+	// 				},
+	// 			}
+	// 		);
 
-			if (!response.ok) {
-				throw new Error(`HTTP error! Status: ${response.status}`);
-			}
+	// 		if (!response.ok) {
+	// 			throw new Error(`HTTP error! Status: ${response.status}`);
+	// 		}
 
-			const result = await response.json();
-			console.log(result[0]);
-			setCoords({
-				lat: result[0].latitude,
-				lon: result[0].longitude,
-			});
-			resultData();
-		} catch (error) {
-			console.error("Error:", error);
-		}
-	}
+	// 		const result = await response.json();
+	// 		console.log(result[0]);
+	// 		setCoords({
+	// 			lat: result[0].latitude,
+	// 			lon: result[0].longitude,
+	// 		});
+	// 		resultData();
+	// 	} catch (error) {
+	// 		console.error("Error:", error);
+	// 	}
+	// }
 
 	function submitForm(e) {
 		e.preventDefault();
-		testData();
+		resultData();
 		setCity("");
 		setIsLoaded(false);
 	}
@@ -70,40 +73,40 @@ export default function Forecast() {
 			<div className="max-w-full mx-auto w-1/2 my-0 mt-6 text-xl">
 				{isLoaded ? (
 					<>
-						<form className="bg-black flex flex-col">
-							<div className="flex flex-col pl-6">
-								<label htmlFor="">City </label>
+						<form className="bg-black flex flex-col py-5">
+							<div className="flex px-6 justify-between">
+							
 								<input
 									type="text"
 									placeholder="Enter City..."
-									className="w-1/2 text-black"
+									className="w-1/2 rounded-full px-3 text-black"
 									onChange={(e) => setCity(e.target.value)}
 									value={city}
 								/>
-								<button onClick={(e) => submitForm(e)}>
+								<button onClick={(e) => submitForm(e)} className=" text-black bg-white hover:bg-gray-500 hover:text-black duration:200 px-6 py-2 rounded-full ease-in-out">
 									Submit
 								</button>
 							</div>
 						</form>
-						<div className="bg-slate-700 pl-6 flex flex-col gap-3">
-							<h3>Name of the City - {ans.name}</h3>
+						<div className="bg-slate-700 pl-6 flex flex-col gap-3 py-3">
+							<h3>Name of the City - {ans.city.name}</h3>
 							<h3>
-								Current Teamprature - {celsius(ans.main.temp)} C
+								Current Teamprature - {ans.list[0].main.temp} C
 							</h3>
 							<h3>
-								Max Temprature - {celsius(ans.main.temp_max)} C
+								Max Temprature - {(ans.list[0].main.temp_max)} C
 							</h3>
 							<h3>
-								Max Temprature - {celsius(ans.main.temp_min)} C
+								Min Temprature - {(ans.list[0].main.temp_min)} C
 							</h3>
-							<h3>Humidity - {ans.main.humidity} %</h3>
+							<h3>Humidity - {ans.list[0].main.humidity} %</h3>
 						</div>
 					</>
 				) : (
-					<div role="status">
+					<div role="status" className="w-full flex justify-center">
 						<svg
 							aria-hidden="true"
-							className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+							className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-black"
 							viewBox="0 0 100 101"
 							fill="none"
 							xmlns="http://www.w3.org/2000/svg"
