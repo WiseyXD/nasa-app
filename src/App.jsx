@@ -10,6 +10,7 @@ import Map from "./Components/Map";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Forecast from "./Components/Forecast";
+import SpaceGPT from "./Components/SpaceGPT";
 function App() {
 	const [count, setCount] = useState(0);
 	const router = createBrowserRouter([
@@ -22,7 +23,6 @@ function App() {
 			element: <Gallery />,
 		},
 		{
-
 			path: "/quiz",
 			element: <Quiz />,
 		},
@@ -30,12 +30,14 @@ function App() {
 			path: "/map",
 			element: <Map />,
 		},
-
-    {
+		{
 			path: "/forecast",
 			element: <Forecast />,
 		},
-
+		{
+			path: "/space",
+			element: <SpaceGPT />,
+		},
 	]);
 
 	return (
