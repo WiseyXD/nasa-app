@@ -20,7 +20,9 @@ function App() {
 			<div className="bg-[#1E1E1E]">
 				<News />
 			</div>
-			<Footer />
+			<div>
+				<Footer />
+			</div>
 		</>
 	);
 }
