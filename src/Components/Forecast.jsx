@@ -1,18 +1,25 @@
 import { useState, useEffect } from "react";
 
 export default function Forecast() {
-	const [coords, setCoords] = useState({ lat: "", lon: "" });
-	const [city, setCity] = useState("");
+	const [city, setCity] = useState("London");
 	const [ans, setAns] = useState("");
 	const [isLoaded, setIsLoaded] = useState(true);
+	function getRandomForecast() {
+		const forecast = ["Might Rain", "Will Rain", "Sunny"];
+		const randomIndex = Math.floor(Math.random() * forecast.length);
+		return forecast[randomIndex];
+	}
+	const finalForecast = getRandomForecast();
+
 	const url = `https://apjoy-weather-forecast.p.rapidapi.com/forecast?location=${city}&days=3`;
 	const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '42047b4750msh234436c97fc8894p1a2e84jsn3df40fb61052',
-		'X-RapidAPI-Host': 'apjoy-weather-forecast.p.rapidapi.com'
-	}
-};
+		method: "GET",
+		headers: {
+			"X-RapidAPI-Key":
+				"42047b4750msh234436c97fc8894p1a2e84jsn3df40fb61052",
+			"X-RapidAPI-Host": "apjoy-weather-forecast.p.rapidapi.com",
+		},
+	};
 	// function celsius(num) {
 	// 	return Math.floor(num - 273.15);
 	// }
@@ -61,9 +68,9 @@ export default function Forecast() {
 		setIsLoaded(false);
 	}
 
-	// useEffect(() => {
-	// 	testData();
-	// }, []);
+	useEffect(() => {
+		resultData();
+	}, []);
 
 	return (
 		<div className="flex flex-col justify-center items-center mt-6">
@@ -75,7 +82,6 @@ export default function Forecast() {
 					<>
 						<form className="bg-black flex flex-col py-5">
 							<div className="flex px-6 justify-between">
-							
 								<input
 									type="text"
 									placeholder="Enter City..."
@@ -83,23 +89,28 @@ export default function Forecast() {
 									onChange={(e) => setCity(e.target.value)}
 									value={city}
 								/>
-								<button onClick={(e) => submitForm(e)} className=" text-black bg-white hover:bg-gray-500 hover:text-black duration:200 px-6 py-2 rounded-full ease-in-out">
+								<button
+									onClick={(e) => submitForm(e)}
+									className=" text-black bg-white hover:bg-gray-500 hover:text-black duration:200 px-6 py-2 rounded-full ease-in-out"
+								>
 									Submit
 								</button>
 							</div>
 						</form>
 						<div className="bg-slate-700 pl-6 flex flex-col gap-3 py-3">
-							<h3>Name of the City - {ans.city.name}</h3>
+							{/* <h3>Name of the City - {city}</h3> */}
+
+							{/* <h3>Forecast - {finalForecast}</h3>
 							<h3>
 								Current Teamprature - {ans.list[0].main.temp} C
 							</h3>
 							<h3>
-								Max Temprature - {(ans.list[0].main.temp_max)} C
+								Max Temprature - {ans.list[0].main.temp_max} C
 							</h3>
 							<h3>
-								Min Temprature - {(ans.list[0].main.temp_min)} C
+								Min Temprature - {ans.list[0].main.temp_min} C
 							</h3>
-							<h3>Humidity - {ans.list[0].main.humidity} %</h3>
+							<h3>Humidity - {ans.list[0].main.humidity} %</h3> */}
 						</div>
 					</>
 				) : (

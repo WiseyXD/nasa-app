@@ -12,7 +12,6 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Forecast from "./Components/Forecast";
 
 function App() {
-	const [count, setCount] = useState(0);
 	const router = createBrowserRouter([
 		{
 			path: "/",
